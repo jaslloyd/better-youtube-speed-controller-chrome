@@ -22,7 +22,7 @@ const setNewRateFromOverlay = (step) => {
 
 const injectOverlay = (rate) => {
   const overlayElement = document.createElement("div");
-  overlayElement.id = "bvsc-container";
+  overlayElement.id = "bvsc-overlay";
   overlayElement.innerHTML = `
     <button id='bvsc-slower'>-</button>
     <p id='bvsc-currentRate'>${rate}x</p>
@@ -36,6 +36,7 @@ const injectOverlay = (rate) => {
   container.appendChild(overlayElement);
 
   document.getElementById("bvsc-slower").addEventListener("click", () => {
+    console.log("SLOWERRR");
     setNewRateFromOverlay(-0.25);
   });
 

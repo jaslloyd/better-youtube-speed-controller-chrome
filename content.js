@@ -19,17 +19,23 @@ const setVideoSpeed = (rate) => {
   return false;
 };
 
-if (!setVideoSpeed(2.0)) {
-  console.warn("No video yet — watching for it...");
+const main = () => {
+  if (!setVideoSpeed(DEFAULT_PLAYBACK_RATE)) {
+    console.warn("No video yet — watching for it...");
 
-  const observer = new MutationObserver(() => {
-    if (setVideoSpeed(2.0)) {
-      observer.disconnect();
-    }
-  });
+    const observer = new MutationObserver(() => {
+      if (setVideoSpeed(DEFAULT_PLAYBACK_RATE)) {
+        observer.disconnect();
+      }
+    });
 
-  observer.observe(document.body, {
-    childList: true, // watch for elements being added/removed
-    subtree: true, // watch all descendants, not just direct children
-  });
-}
+    observer.observe(document.body, {
+      childList: true, // watch for elements being added/removed
+      subtree: true, // watch all descendants, not just direct children
+    });
+  }
+};
+
+main();
+
+document.addEventListener("yt-navigate-finish", main);

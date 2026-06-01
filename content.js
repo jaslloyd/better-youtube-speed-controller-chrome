@@ -13,6 +13,37 @@ const setVideoSpeed = (rate) => {
   return false;
 };
 
+const setNewRateFromOverlay = (step) => {
+  const newRate = document.querySelector("video").playbackRate + step;
+  document.getElementById("bvsc-currentRate").textContent = `${newRate}x`;
+  setVideoSpeed(newRate);
+  chrome.storage.sync.set({ playbackRate: newRate });
+};
+
+const injectOverlay = (rate) => {
+  const overlayElement = document.createElement("div");
+  overlayElement.id = "bvsc-container";
+  overlayElement.innerHTML = `
+    <button id='bvsc-slower'>-</button>
+    <p id='bvsc-currentRate'>${rate}x</p>
+    <button id='bvsc-faster'>+</button>
+  `;
+
+  const videoEl = document.querySelector("video");
+  const container =
+    videoEl.closest(".html5-video-container") ?? videoEl.parentElement;
+
+  container.appendChild(overlayElement);
+
+  document.getElementById("bvsc-slower").addEventListener("click", () => {
+    setNewRateFromOverlay(-0.25);
+  });
+
+  document.getElementById("bvsc-faster").addEventListener("click", () => {
+    setNewRateFromOverlay(0.25);
+  });
+};
+
 const main = () => {
   chrome.storage.sync.get("playbackRate", (result) => {
     const rate = result.playbackRate ?? DEFAULT_PLAYBACK_RATE;
@@ -29,6 +60,9 @@ const main = () => {
         childList: true, // watch for elements being added/removed
         subtree: true, // watch all descendants, not just direct children
       });
+    }
+    if (!document.getElementById("bvsc-overlay")) {
+      injectOverlay(rate);
     }
   });
 };

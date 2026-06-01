@@ -1,0 +1,44 @@
+:root {
+  --yt-red: #ff0000;
+  --yt-bg: #0f0f0f;
+  --yt-text: #f1f1f1;
+  --yt-surface: #272727;
+  --yt-border: #3f3f3f;
+}
+
+html {
+  background-color: var(--yt-bg);
+  color: var(--yt-text);
+}
+
+body {
+  width: 240px;
+  padding: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--yt-text);
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input[type="number"] {
+  width: 100%;
+  background-color: var(--yt-surface);
+  color: var(--yt-text);
+  border: 1px solid var(--yt-border);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input[type="number"]:focus {
+  border-color: var(--yt-red);
+}

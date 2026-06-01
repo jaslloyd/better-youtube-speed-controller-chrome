@@ -3,7 +3,7 @@
   "name": "Better Youtube Video Speed Controller",
   "version": "0.1.0",
   "description": "Control video playback speed on youtube",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "content_scripts": [
     {
       "matches": ["*://www.youtube.com/*"],

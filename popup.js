@@ -35,7 +35,11 @@ chrome.storage.sync.get("playbackRate", (result) => {
 });
 
 const setNewRate = (step) => {
-  const newRate = parseFloat(document.getElementById("rateInput").value) + step;
+  // Avoid floating numbers
+  const newRate =
+    Math.round(
+      (parseFloat(document.getElementById("rateInput").value) + step) * 100,
+    ) / 100;
   updateDisplay(newRate);
   saveRate(newRate);
 };

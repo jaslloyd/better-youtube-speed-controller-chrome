@@ -41,15 +41,26 @@ const injectOverlay = (rate) => {
   const container =
     videoEl.closest(".html5-video-container") ?? videoEl.parentElement;
 
+  container.style.position = "relative";
   container.appendChild(overlayElement);
 
-  document.getElementById("bvsc-slower").addEventListener("click", () => {
-    console.log("SLOWERRR");
+  document.getElementById("bvsc-slower").addEventListener("click", (e) => {
+    e.stopPropagation();
     setNewRateFromOverlay(-0.25);
   });
 
-  document.getElementById("bvsc-faster").addEventListener("click", () => {
+  document.getElementById("bvsc-faster").addEventListener("click", (e) => {
+    e.stopPropagation();
     setNewRateFromOverlay(0.25);
+  });
+
+  // Need this as youtube will go fullscreen if you click really fast
+  document.getElementById("bvsc-slower").addEventListener("dblclick", (e) => {
+    e.stopPropagation();
+  });
+
+  document.getElementById("bvsc-faster").addEventListener("dblclick", (e) => {
+    e.stopPropagation();
   });
 };
 

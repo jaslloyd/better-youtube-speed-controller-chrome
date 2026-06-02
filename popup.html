@@ -1,19 +1,51 @@
 <!doctype html>
 <html>
   <head>
-    <title>Better Youtube Video Speed Controller</title>
+    <title>Better YouTube Video Speed Controller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h1>Speed Controller</h1>
-    <input
-      type="number"
-      id="rateInput"
-      min="0.25"
-      max="16"
-      step="0.25"
-      value="2.0"
-    />
+    <div class="popup">
+      <div class="popup-header">
+        <div class="popup-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+        <div class="popup-title">Speed Controller</div>
+      </div>
+
+      <div class="speed-label">Playback rate</div>
+      <div class="speed-display" id="display">2.0<span>x</span></div>
+
+      <input
+        class="speed-input"
+        type="number"
+        id="rateInput"
+        min="0.25"
+        max="16"
+        step="0.25"
+        value="2.0"
+      />
+
+      <div class="step-buttons">
+        <button class="step-btn" id="slower">
+          − <span class="muted">0.25</span>
+        </button>
+        <button class="step-btn" id="faster">
+          + <span class="muted">0.25</span>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+      <div class="footer">applies to all youtube videos</div>
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>

@@ -43,4 +43,4 @@ User preferences are stored via `chrome.storage.sync`, meaning your default spee
 
 ## Why I built this
 
-I wanted to ship something small, focused, and useful — and learn the Chrome Extensions API properly in the process.
+I wanted to ship something small, focused, and useful — and learn the Chrome Extensions API properly in the process. I am also sick of all the bugs that the existing ones have.

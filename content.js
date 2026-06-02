@@ -29,6 +29,14 @@ const injectOverlay = (rate) => {
     <button id='bvsc-faster'>+</button>
   `;
 
+  if (!document.getElementById("bvsc-styles")) {
+    const style = document.createElement("link");
+    style.id = "bvsc-styles";
+    style.rel = "stylesheet";
+    style.href = chrome.runtime.getURL("overlay.css");
+    document.head.appendChild(style);
+  }
+
   const videoEl = document.querySelector("video");
   const container =
     videoEl.closest(".html5-video-container") ?? videoEl.parentElement;

@@ -10,6 +10,12 @@
       "js": ["content.js"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["overlay.css"],
+      "matches": ["*://www.youtube.com/*"]
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icons/icon.png"

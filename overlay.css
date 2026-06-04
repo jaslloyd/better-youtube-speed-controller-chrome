@@ -5,10 +5,12 @@
   position: absolute;
   z-index: 99999;
   gap: 8px;
-  right: 10px;
+  right: 50px;
+  top: 5px;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   padding: 6px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 #bvsc-overlay p {

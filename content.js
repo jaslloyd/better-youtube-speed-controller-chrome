@@ -1,6 +1,7 @@
 // This runs inside the YouTube page
 console.log("Better Video Speed Controller loaded");
 
+const INITIAL_PLAYBACK_RATE = 1.0;
 const DEFAULT_PLAYBACK_RATE = 2.0;
 
 const setVideoSpeed = (rate) => {
@@ -20,12 +21,19 @@ const setNewRateFromOverlay = (step) => {
   chrome.storage.sync.set({ playbackRate: newRate });
 };
 
+const resetRate = () => {
+  document.getElementById("bvsc-currentRate").textContent =
+    `${INITIAL_PLAYBACK_RATE}x`;
+  setVideoSpeed(INITIAL_PLAYBACK_RATE);
+  chrome.storage.sync.set({ playbackRate: INITIAL_PLAYBACK_RATE });
+};
+
 const injectOverlay = (rate) => {
   const overlayElement = document.createElement("div");
   overlayElement.id = "bvsc-overlay";
   overlayElement.innerHTML = `
     <button id='bvsc-slower'>-</button>
-    <p id='bvsc-currentRate'>${rate}x</p>
+    <button id='bvsc-currentRate'>${rate}x</button>
     <button id='bvsc-faster'>+</button>
   `;
 
@@ -47,6 +55,11 @@ const injectOverlay = (rate) => {
   document.getElementById("bvsc-slower").addEventListener("click", (e) => {
     e.stopPropagation();
     setNewRateFromOverlay(-0.25);
+  });
+
+  document.getElementById("bvsc-currentRate").addEventListener("click", (e) => {
+    e.stopPropagation();
+    resetRate();
   });
 
   document.getElementById("bvsc-faster").addEventListener("click", (e) => {

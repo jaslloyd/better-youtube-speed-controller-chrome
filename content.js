@@ -104,7 +104,7 @@ main();
 
 document.addEventListener("yt-navigate-finish", main);
 
-// Handles chaning the speed by the user
+// Handles changing the speed by the user
 chrome.runtime.onMessage.addListener((message) => {
   const { type, rate } = message;
   if (type === "SET_SPEED") {

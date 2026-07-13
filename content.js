@@ -77,14 +77,27 @@ const injectOverlay = (rate) => {
   });
 };
 
+// Sets the speed and injects the overlay. Returns true once a video exists
+// and both have been handled, false if there's no video to work with yet.
+const setup = (rate) => {
+  if (!document.querySelector("video")) {
+    return false;
+  }
+  setVideoSpeed(rate);
+  if (!document.getElementById("bvsc-overlay")) {
+    injectOverlay(rate);
+  }
+  return true;
+};
+
 const main = () => {
   chrome.storage.sync.get("playbackRate", (result) => {
     const rate = result.playbackRate ?? DEFAULT_PLAYBACK_RATE;
-    if (!setVideoSpeed(rate)) {
+    if (!setup(rate)) {
       console.warn("No video yet — watching for it...");
 
       const observer = new MutationObserver(() => {
-        if (setVideoSpeed(rate)) {
+        if (setup(rate)) {
           observer.disconnect();
         }
       });
@@ -93,9 +106,6 @@ const main = () => {
         childList: true, // watch for elements being added/removed
         subtree: true, // watch all descendants, not just direct children
       });
-    }
-    if (!document.getElementById("bvsc-overlay")) {
-      injectOverlay(rate);
     }
   });
 };
